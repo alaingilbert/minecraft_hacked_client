@@ -1167,6 +1167,20 @@ public class EntityRenderer implements IResourceManagerReloadListener
 
                 if (!this.mc.gameSettings.hideGUI || this.mc.currentScreen != null)
                 {
+
+                    // Draw player position
+                    GlStateManager.pushMatrix();
+                    String ps = String.format("%.0f, %.0f, %.0f", this.mc.player.posX, this.mc.player.posY, this.mc.player.posZ);
+                    int textWidth = this.mc.fontRendererObj.getStringWidth(ps);
+                    int paddingTop = 10;
+                    int paddingRight = 10;
+                    int scaleX = 2;
+                    int scaleY = 2;
+                    int scaledWidth = this.mc.displayWidth/scaleX;
+                    GlStateManager.scale(scaleX,scaleY,1);
+                    this.mc.fontRendererObj.drawStringWithShadow(ps, scaledWidth - textWidth - paddingRight/scaleX, paddingTop/scaleY, 16777215);
+                    GlStateManager.popMatrix();
+
                     GlStateManager.alphaFunc(516, 0.1F);
                     this.setupOverlayRendering();
                     this.func_190563_a(i1, j1, partialTicks);
