@@ -41,6 +41,7 @@ import java.util.function.Predicate;
 import java.util.stream.Collectors;
 import javax.annotation.Nullable;
 import javax.imageio.ImageIO;
+import manticore.Manticore;
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
 import net.minecraft.block.state.IBlockState;
@@ -2262,6 +2263,13 @@ public class Minecraft implements IThreadListener, ISnooperInfo
                     GuiContainerCreative.func_192044_a(this, i, flag1, flag);
                 }
             }
+        }
+
+
+        while (this.gameSettings.keyBindLight.isPressed())
+        {
+            Manticore.lightActive = !Manticore.lightActive;
+            this.renderGlobal.loadRenderers();
         }
 
         while (this.gameSettings.keyBindInventory.isPressed())

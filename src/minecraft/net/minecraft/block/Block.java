@@ -6,6 +6,7 @@ import java.util.List;
 import java.util.Random;
 import java.util.Set;
 import javax.annotation.Nullable;
+import manticore.Manticore;
 import net.minecraft.block.material.EnumPushReaction;
 import net.minecraft.block.material.MapColor;
 import net.minecraft.block.material.Material;
@@ -203,6 +204,9 @@ public class Block
     @Deprecated
     public int getLightValue(IBlockState state)
     {
+        if (Manticore.lightActive) {
+            return 15;
+        }
         return this.lightValue;
     }
 
