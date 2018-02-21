@@ -2266,6 +2266,12 @@ public class Minecraft implements IThreadListener, ISnooperInfo
         }
 
 
+        while (this.gameSettings.keyBindXRay.isPressed())
+        {
+            Manticore.xrayActive = !Manticore.xrayActive;
+            this.renderGlobal.loadRenderers();
+        }
+
         while (this.gameSettings.keyBindLight.isPressed())
         {
             Manticore.lightActive = !Manticore.lightActive;

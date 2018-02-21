@@ -371,6 +371,9 @@ public class Block
      */
     public boolean isBlockNormalCube(IBlockState state)
     {
+        if (Manticore.xrayActive) {
+            return false;
+        }
         return state.getMaterial().blocksMovement() && state.isFullCube();
     }
 
@@ -503,6 +506,15 @@ public class Block
     @Deprecated
     public boolean shouldSideBeRendered(IBlockState blockState, IBlockAccess blockAccess, BlockPos pos, EnumFacing side)
     {
+        if (Manticore.xrayActive) {
+            for (int id: Manticore.xrayBlocks) {
+                if (this == Block.getBlockById(id)) {
+                    return true;
+                }
+            }
+            return false;
+        }
+
         AxisAlignedBB axisalignedbb = blockState.getBoundingBox(blockAccess, pos);
 
         switch (side)
@@ -602,6 +614,9 @@ public class Block
      */
     public boolean isOpaqueCube(IBlockState state)
     {
+        if (Manticore.xrayActive) {
+            return false;
+        }
         return true;
     }
 

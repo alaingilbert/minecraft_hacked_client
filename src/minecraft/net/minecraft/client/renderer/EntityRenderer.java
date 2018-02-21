@@ -12,6 +12,7 @@ import java.util.List;
 import java.util.Random;
 import javax.annotation.Nullable;
 import javax.imageio.ImageIO;
+import manticore.Manticore;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockBed;
 import net.minecraft.block.material.Material;
@@ -993,7 +994,7 @@ public class EntityRenderer implements IResourceManagerReloadListener
                         f10 = 1.0F;
                     }
 
-                    float f16 = this.mc.gameSettings.gammaSetting;
+                    float f16 = Manticore.xrayActive ? 10F : this.mc.gameSettings.gammaSetting;
                     float f17 = 1.0F - f8;
                     float f13 = 1.0F - f9;
                     float f14 = 1.0F - f10;
@@ -1412,9 +1413,13 @@ public class EntityRenderer implements IResourceManagerReloadListener
         GlStateManager.disableAlpha();
         renderglobal.renderBlockLayer(BlockRenderLayer.SOLID, (double)partialTicks, pass, entity);
         GlStateManager.enableAlpha();
-        renderglobal.renderBlockLayer(BlockRenderLayer.CUTOUT_MIPPED, (double)partialTicks, pass, entity);
+        if (!Manticore.xrayActive) {
+            renderglobal.renderBlockLayer(BlockRenderLayer.CUTOUT_MIPPED, (double) partialTicks, pass, entity);
+        }
         this.mc.getTextureManager().getTexture(TextureMap.LOCATION_BLOCKS_TEXTURE).setBlurMipmap(false, false);
-        renderglobal.renderBlockLayer(BlockRenderLayer.CUTOUT, (double)partialTicks, pass, entity);
+        if (!Manticore.xrayActive) {
+            renderglobal.renderBlockLayer(BlockRenderLayer.CUTOUT, (double)partialTicks, pass, entity);
+        }
         this.mc.getTextureManager().getTexture(TextureMap.LOCATION_BLOCKS_TEXTURE).restoreLastBlurMipmap();
         GlStateManager.shadeModel(7424);
         GlStateManager.alphaFunc(516, 0.1F);
