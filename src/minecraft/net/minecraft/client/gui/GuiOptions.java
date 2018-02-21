@@ -82,6 +82,7 @@ public class GuiOptions extends GuiScreen
         this.buttonList.add(new GuiButton(103, this.width / 2 + 5, this.height / 6 + 96 - 6, 150, 20, I18n.format("options.chat.title")));
         this.buttonList.add(new GuiButton(105, this.width / 2 - 155, this.height / 6 + 120 - 6, 150, 20, I18n.format("options.resourcepack")));
         this.buttonList.add(new GuiButton(104, this.width / 2 + 5, this.height / 6 + 120 - 6, 150, 20, I18n.format("options.snooper.view")));
+        this.buttonList.add(new GuiButton(111, this.width / 2 - 155, this.height / 6 + 144 - 6, 150, 20, "Manticore"));
         this.buttonList.add(new GuiButton(200, this.width / 2 - 100, this.height / 6 + 168, I18n.format("gui.done")));
     }
 
@@ -150,6 +151,12 @@ public class GuiOptions extends GuiScreen
             {
                 this.mc.gameSettings.saveOptions();
                 this.mc.displayGuiScreen(new GuiCustomizeSkin(this));
+            }
+
+            if (button.id == 111)
+            {
+                this.mc.gameSettings.saveOptions();
+                this.mc.displayGuiScreen(new GuiManticoreSettings(this, this.settings));
             }
 
             if (button.id == 101)

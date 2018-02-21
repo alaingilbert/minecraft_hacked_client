@@ -507,6 +507,11 @@ public class Block
     public boolean shouldSideBeRendered(IBlockState blockState, IBlockAccess blockAccess, BlockPos pos, EnumFacing side)
     {
         if (Manticore.xrayActive) {
+            if (this == Block.getBlockById(7))  return Manticore.xrayBedrock;
+            if (this == Block.getBlockById(14)) return Manticore.xrayGoldOre;
+            if (this == Block.getBlockById(15)) return Manticore.xrayIronOre;
+            if (this == Block.getBlockById(16)) return Manticore.xrayCoalOre;
+            if (this == Block.getBlockById(56)) return Manticore.xrayDiamondOre;
             for (int id: Manticore.xrayBlocks) {
                 if (this == Block.getBlockById(id)) {
                     return true;
