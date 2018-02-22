@@ -204,9 +204,6 @@ public class Block
     @Deprecated
     public int getLightValue(IBlockState state)
     {
-        if (Manticore.lightActive) {
-            return 15;
-        }
         return this.lightValue;
     }
 
