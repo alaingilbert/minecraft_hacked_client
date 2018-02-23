@@ -42,6 +42,8 @@ public class GuiMainMenu extends GuiScreen
     private static final Logger LOGGER = LogManager.getLogger();
     private static final Random RANDOM = new Random();
 
+    private static final String ManticoreVersion = "Manticore 0.4.1";
+
     /** Counts the number of screen updates. */
     private final float updateCounter;
 
@@ -209,7 +211,7 @@ public class GuiMainMenu extends GuiScreen
     {
         this.viewportTexture = new DynamicTexture(256, 256);
         this.backgroundTexture = this.mc.getTextureManager().getDynamicTextureLocation("background", this.viewportTexture);
-        this.field_193978_M = this.fontRendererObj.getStringWidth("Manticore");
+        this.field_193978_M = this.fontRendererObj.getStringWidth(ManticoreVersion);
         this.field_193979_N = this.width - this.field_193978_M - 2;
         Calendar calendar = Calendar.getInstance();
         calendar.setTime(new Date());
@@ -595,7 +597,7 @@ public class GuiMainMenu extends GuiScreen
         }
 
         this.drawString(this.fontRendererObj, s, 2, this.height - 10, -1);
-        this.drawString(this.fontRendererObj, "Manticore", this.field_193979_N, this.height - 10, -1);
+        this.drawString(this.fontRendererObj, ManticoreVersion, this.field_193979_N, this.height - 10, -1);
 
         if (mouseX > this.field_193979_N && mouseX < this.field_193979_N + this.field_193978_M && mouseY > this.height - 10 && mouseY < this.height && Mouse.isInsideWindow())
         {
