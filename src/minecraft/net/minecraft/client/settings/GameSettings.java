@@ -128,7 +128,7 @@ public class GameSettings
     public TutorialSteps field_193631_S = TutorialSteps.MOVEMENT;
     public KeyBinding keyBindLight = new KeyBinding("key.light", Keyboard.KEY_V, "key.categories.gameplay");
     public KeyBinding keyBindXRay = new KeyBinding("key.XRay", Keyboard.KEY_X, "key.categories.gameplay");
-    public KeyBinding keyBindChestESP = new KeyBinding("key.ChestESP", Keyboard.KEY_N, "key.categories.manticore");
+    public KeyBinding keyBindChestESP = new KeyBinding("key.ChestESP", Keyboard.KEY_L, "key.categories.gameplay");
     public KeyBinding keyBindForward = new KeyBinding("key.forward", 17, "key.categories.movement");
     public KeyBinding keyBindLeft = new KeyBinding("key.left", 30, "key.categories.movement");
     public KeyBinding keyBindBack = new KeyBinding("key.back", 31, "key.categories.movement");
