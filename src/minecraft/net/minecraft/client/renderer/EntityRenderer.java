@@ -994,7 +994,24 @@ public class EntityRenderer implements IResourceManagerReloadListener
                         f10 = 1.0F;
                     }
 
-                    float f16 = (Manticore.xrayActive || Manticore.lightActive) ? 10F : this.mc.gameSettings.gammaSetting;
+                    float duration = 1000F;
+                    long diff = System.currentTimeMillis() - Manticore.lightTimer;
+                    float f16;
+                    float nval;
+                    if (Manticore.xrayActive) {
+                        nval = 10F;
+                    } else if (Manticore.lightActive) {
+                        nval = 10F;
+                        if (diff < duration) {
+                            nval = ((10F - this.mc.gameSettings.gammaSetting) / duration) * (((float)Math.pow((float)diff/duration, 3)) * duration) + this.mc.gameSettings.gammaSetting;
+                        }
+                    } else {
+                        nval = this.mc.gameSettings.gammaSetting;
+                        if (diff < duration) {
+                            nval = ((this.mc.gameSettings.gammaSetting - 10F) / duration) * (((float)Math.pow(((float)diff/duration)-1F, 3)+1F) * duration) + 10F;
+                        }
+                    }
+                    f16 = nval;
                     float f17 = 1.0F - f8;
                     float f13 = 1.0F - f9;
                     float f14 = 1.0F - f10;
