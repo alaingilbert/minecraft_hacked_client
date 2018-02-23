@@ -125,7 +125,17 @@ public class Manticore {
         double angle = Math.atan2(Manticore.gpsX - d0, Manticore.gpsZ - d2);
         GL11.glRotated(angle * 180 / Math.PI, 0, 1, 0);
         GL11.glTranslatef(0, 0, 3);
-        GL11.glColor4f(1F, 0F, 0F, 0.15F);
+
+        EntityPlayerSP player = Minecraft.getMinecraft().player;
+        double dd0 = player.posX + 0.5D - Manticore.gpsX;
+        double dd2 = player.posZ + 0.5D - Manticore.gpsZ;
+        double dist = dd0 * dd0 + dd2 * dd2;
+
+        float pct = Manticore.getPct(1, 400, (float)dist);
+        float red = Manticore.interpolate(0F, 1F, pct);
+        float green = Manticore.interpolate(1F, 0F, pct);
+
+        GL11.glColor4f(red, green, 0F, 0.15F);
 
         GL11.glBegin(GL11.GL_POLYGON);
         GL11.glVertex3d(0, 0.2,1);
@@ -138,7 +148,7 @@ public class Manticore {
         GL11.glEnd();
 
         GL11.glLineWidth(2F);
-        GL11.glColor4f(1F, 0F, 0F, 0.5F);
+        GL11.glColor4f(red, green, 0F, 0.5F);
         GL11.glBegin(GL11.GL_LINE_LOOP);
         GL11.glVertex3d(0, 0.2,1);
         GL11.glVertex3d(1, 0.2,-0.2f);
