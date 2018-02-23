@@ -9,6 +9,9 @@ import org.lwjgl.opengl.GL11;
 import java.util.List;
 
 public class Manticore {
+    public static boolean gpsActive = false;
+    public static int gpsX = 0;
+    public static int gpsZ = 0;
     public static boolean breadcrumbActive = false;
     public static boolean displayCoords = true;
     public static boolean lightActive = false;
@@ -95,6 +98,61 @@ public class Manticore {
         GL11.glEnd();
 
         GL11.glDepthMask(true);
+        GL11.glDisable(GL11.GL_LINE_SMOOTH);
+        GL11.glEnable(GL11.GL_LIGHTING);
+        GL11.glEnable(GL11.GL_TEXTURE_2D);
+        GL11.glDisable(GL11.GL_BLEND);
+        GL11.glPopMatrix();
+    }
+
+    public static void renderArrow(Entity renderViewEntity, float partialTicks) {
+        GL11.glPushMatrix();
+        GL11.glEnable(GL11.GL_BLEND);
+        GL11.glEnable(GL11.GL_LINE_SMOOTH);
+        GL11.glDisable(GL11.GL_TEXTURE_2D);
+        GL11.glDisable(GL11.GL_DEPTH_TEST);
+        GL11.glDisable(GL11.GL_LIGHTING);
+        GL11.glBlendFunc(770, 771);
+        GL11.glEnable(GL11.GL_BLEND);
+        GL11.glDepthMask(false);
+
+        double d0 = renderViewEntity.prevPosX + (renderViewEntity.posX - renderViewEntity.prevPosX) * (double)partialTicks;
+        double d1 = renderViewEntity.prevPosY + (renderViewEntity.posY - renderViewEntity.prevPosY) * (double)partialTicks;
+        double d2 = renderViewEntity.prevPosZ + (renderViewEntity.posZ - renderViewEntity.prevPosZ) * (double)partialTicks;
+
+        GL11.glPushMatrix();
+        GL11.glTranslatef(0, 0, 0);
+        double angle = Math.atan2(Manticore.gpsX - d0, Manticore.gpsZ - d2);
+        GL11.glRotated(angle * 180 / Math.PI, 0, 1, 0);
+        GL11.glTranslatef(0, 0, 3);
+        GL11.glColor4f(1F, 0F, 0F, 0.15F);
+
+        GL11.glBegin(GL11.GL_POLYGON);
+        GL11.glVertex3d(0, 0.2,1);
+        GL11.glVertex3d(1, 0.2,-0.2f);
+        GL11.glVertex3d(0.4, 0.2,-0.2f);
+        GL11.glVertex3d(0.4, 0.2,-1);
+        GL11.glVertex3d(-0.4, 0.2,-1);
+        GL11.glVertex3d(-0.4, 0.2,-0.2f);
+        GL11.glVertex3d(-1, 0.2,-0.2f);
+        GL11.glEnd();
+
+        GL11.glLineWidth(2F);
+        GL11.glColor4f(1F, 0F, 0F, 0.5F);
+        GL11.glBegin(GL11.GL_LINE_LOOP);
+        GL11.glVertex3d(0, 0.2,1);
+        GL11.glVertex3d(1, 0.2,-0.2f);
+        GL11.glVertex3d(0.4, 0.2,-0.2f);
+        GL11.glVertex3d(0.4, 0.2,-1);
+        GL11.glVertex3d(-0.4, 0.2,-1);
+        GL11.glVertex3d(-0.4, 0.2,-0.2f);
+        GL11.glVertex3d(-1, 0.2,-0.2f);
+        GL11.glEnd();
+
+        GL11.glPopMatrix();
+
+        GL11.glDepthMask(true);
+        GL11.glEnable(GL11.GL_DEPTH_TEST);
         GL11.glDisable(GL11.GL_LINE_SMOOTH);
         GL11.glEnable(GL11.GL_LIGHTING);
         GL11.glEnable(GL11.GL_TEXTURE_2D);

@@ -53,6 +53,7 @@ import net.minecraft.client.gui.FontRenderer;
 import net.minecraft.client.gui.GuiChat;
 import net.minecraft.client.gui.GuiControls;
 import net.minecraft.client.gui.GuiGameOver;
+import net.minecraft.client.gui.GuiGPS;
 import net.minecraft.client.gui.GuiIngame;
 import net.minecraft.client.gui.GuiIngameMenu;
 import net.minecraft.client.gui.GuiMainMenu;
@@ -2273,6 +2274,11 @@ public class Minecraft implements IThreadListener, ISnooperInfo
         {
             Manticore.xrayActive = !Manticore.xrayActive;
             this.renderGlobal.loadRenderers();
+        }
+
+        while (this.gameSettings.keyBindGPS.isPressed())
+        {
+            this.displayGuiScreen(new GuiGPS());
         }
 
         while (this.gameSettings.keyBindChestESP.isPressed())

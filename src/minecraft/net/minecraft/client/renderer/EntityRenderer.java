@@ -1215,6 +1215,14 @@ public class EntityRenderer implements IResourceManagerReloadListener
                         String ps = "Chest ESP";
                         int textWidth = this.mc.fontRendererObj.getStringWidth(ps);
                         this.mc.fontRendererObj.drawStringWithShadow(ps, scaledWidth - textWidth - paddingRight/scaleX, paddingTop/scaleY, 16777215);
+                        paddingTop += 25;
+                    }
+                    if (Manticore.gpsActive) {
+                        String ps = "GPS";
+                        int textWidth = this.mc.fontRendererObj.getStringWidth(ps);
+                        this.mc.fontRendererObj.drawStringWithShadow(ps, scaledWidth - textWidth - paddingRight/scaleX, paddingTop/scaleY, 16777215);
+                        paddingTop += 25;
+                    }
                     }
                     GlStateManager.popMatrix();
 
@@ -1542,6 +1550,10 @@ public class EntityRenderer implements IResourceManagerReloadListener
         if (Manticore.breadcrumbActive) {
             Manticore.updateBreadcrumb();
             Manticore.renderBreadcrumb(entity, partialTicks);
+        }
+
+        if (Manticore.gpsActive) {
+            Manticore.renderArrow(entity, partialTicks);
         }
 
         this.mc.mcProfiler.endStartSection("hand");
