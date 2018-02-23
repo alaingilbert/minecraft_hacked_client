@@ -1199,6 +1199,12 @@ public class EntityRenderer implements IResourceManagerReloadListener
                         this.mc.fontRendererObj.drawStringWithShadow(ps, scaledWidth - textWidth - paddingRight/scaleX, paddingTop/scaleY, 16777215);
                         paddingTop += 25;
                     }
+                    if (Manticore.gpsActive) {
+                        String ps = "GPS (X: " + Manticore.gpsX + ", Z: " + Manticore.gpsZ + ")";
+                        int textWidth = this.mc.fontRendererObj.getStringWidth(ps);
+                        this.mc.fontRendererObj.drawStringWithShadow(ps, scaledWidth - textWidth - paddingRight/scaleX, paddingTop/scaleY, 16777215);
+                        paddingTop += 25;
+                    }
                     if (Manticore.xrayActive) {
                         String ps = "X-ray";
                         int textWidth = this.mc.fontRendererObj.getStringWidth(ps);
@@ -1213,12 +1219,6 @@ public class EntityRenderer implements IResourceManagerReloadListener
                     }
                     if (Manticore.chestESPActive) {
                         String ps = "Chest ESP";
-                        int textWidth = this.mc.fontRendererObj.getStringWidth(ps);
-                        this.mc.fontRendererObj.drawStringWithShadow(ps, scaledWidth - textWidth - paddingRight/scaleX, paddingTop/scaleY, 16777215);
-                        paddingTop += 25;
-                    }
-                    if (Manticore.gpsActive) {
-                        String ps = "GPS";
                         int textWidth = this.mc.fontRendererObj.getStringWidth(ps);
                         this.mc.fontRendererObj.drawStringWithShadow(ps, scaledWidth - textWidth - paddingRight/scaleX, paddingTop/scaleY, 16777215);
                         paddingTop += 25;
