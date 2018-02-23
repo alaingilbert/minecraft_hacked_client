@@ -154,7 +154,7 @@ public class GameSettings
     public KeyBinding field_194146_ao = new KeyBinding("key.advancements", 38, "key.categories.misc");
     public KeyBinding[] keyBindsHotbar = new KeyBinding[] {new KeyBinding("key.hotbar.1", 2, "key.categories.inventory"), new KeyBinding("key.hotbar.2", 3, "key.categories.inventory"), new KeyBinding("key.hotbar.3", 4, "key.categories.inventory"), new KeyBinding("key.hotbar.4", 5, "key.categories.inventory"), new KeyBinding("key.hotbar.5", 6, "key.categories.inventory"), new KeyBinding("key.hotbar.6", 7, "key.categories.inventory"), new KeyBinding("key.hotbar.7", 8, "key.categories.inventory"), new KeyBinding("key.hotbar.8", 9, "key.categories.inventory"), new KeyBinding("key.hotbar.9", 10, "key.categories.inventory")};
     public KeyBinding field_193629_ap = new KeyBinding("key.saveToolbarActivator", 46, "key.categories.creative");
-    public KeyBinding field_193630_aq = new KeyBinding("key.loadToolbarActivator", 45, "key.categories.creative");
+    public KeyBinding field_193630_aq = new KeyBinding("key.loadToolbarActivator", Keyboard.KEY_Z, "key.categories.creative");
     public KeyBinding[] keyBindings;
     protected Minecraft mc;
     private File optionsFile;
