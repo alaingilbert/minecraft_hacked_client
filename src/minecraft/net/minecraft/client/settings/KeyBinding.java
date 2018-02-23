@@ -174,12 +174,13 @@ public class KeyBinding implements Comparable<KeyBinding>
 
     static
     {
-        field_193627_d.put("key.categories.movement", Integer.valueOf(1));
-        field_193627_d.put("key.categories.gameplay", Integer.valueOf(2));
-        field_193627_d.put("key.categories.inventory", Integer.valueOf(3));
-        field_193627_d.put("key.categories.creative", Integer.valueOf(4));
-        field_193627_d.put("key.categories.multiplayer", Integer.valueOf(5));
-        field_193627_d.put("key.categories.ui", Integer.valueOf(6));
-        field_193627_d.put("key.categories.misc", Integer.valueOf(7));
+        field_193627_d.put("Manticore", Integer.valueOf(1));
+        field_193627_d.put("key.categories.movement", Integer.valueOf(2));
+        field_193627_d.put("key.categories.gameplay", Integer.valueOf(3));
+        field_193627_d.put("key.categories.inventory", Integer.valueOf(4));
+        field_193627_d.put("key.categories.creative", Integer.valueOf(5));
+        field_193627_d.put("key.categories.multiplayer", Integer.valueOf(6));
+        field_193627_d.put("key.categories.ui", Integer.valueOf(7));
+        field_193627_d.put("key.categories.misc", Integer.valueOf(8));
     }
 }

@@ -126,9 +126,9 @@ public class GameSettings
     public boolean realmsNotifications = true;
     public boolean autoJump = true;
     public TutorialSteps field_193631_S = TutorialSteps.MOVEMENT;
-    public KeyBinding keyBindLight = new KeyBinding("key.light", Keyboard.KEY_V, "key.categories.gameplay");
-    public KeyBinding keyBindXRay = new KeyBinding("key.XRay", Keyboard.KEY_X, "key.categories.gameplay");
-    public KeyBinding keyBindChestESP = new KeyBinding("key.ChestESP", Keyboard.KEY_L, "key.categories.gameplay");
+    public KeyBinding keyBindLight = new KeyBinding("Fullbright", Keyboard.KEY_V, "Manticore");
+    public KeyBinding keyBindXRay = new KeyBinding("X-ray", Keyboard.KEY_X, "Manticore");
+    public KeyBinding keyBindChestESP = new KeyBinding("Chest ESP", Keyboard.KEY_L, "Manticore");
     public KeyBinding keyBindForward = new KeyBinding("key.forward", 17, "key.categories.movement");
     public KeyBinding keyBindLeft = new KeyBinding("key.left", 30, "key.categories.movement");
     public KeyBinding keyBindBack = new KeyBinding("key.back", 31, "key.categories.movement");
