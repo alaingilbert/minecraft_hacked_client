@@ -1192,6 +1192,12 @@ public class EntityRenderer implements IResourceManagerReloadListener
                         String ps = "Fullbright";
                         int textWidth = this.mc.fontRendererObj.getStringWidth(ps);
                         this.mc.fontRendererObj.drawStringWithShadow(ps, scaledWidth - textWidth - paddingRight/scaleX, paddingTop/scaleY, 16777215);
+                        paddingTop += 25;
+                    }
+                    if (Manticore.chestESPActive) {
+                        String ps = "Chest ESP";
+                        int textWidth = this.mc.fontRendererObj.getStringWidth(ps);
+                        this.mc.fontRendererObj.drawStringWithShadow(ps, scaledWidth - textWidth - paddingRight/scaleX, paddingTop/scaleY, 16777215);
                     }
                     GlStateManager.popMatrix();
 
@@ -1445,6 +1451,7 @@ public class EntityRenderer implements IResourceManagerReloadListener
             RenderHelper.enableStandardItemLighting();
             this.mc.mcProfiler.endStartSection("entities");
             renderglobal.renderEntities(entity, icamera, partialTicks);
+            renderglobal.postRenderEntities(entity, icamera, partialTicks);
             RenderHelper.disableStandardItemLighting();
             this.disableLightmap();
         }

@@ -14,6 +14,8 @@ import java.util.Queue;
 import java.util.Random;
 import java.util.Set;
 import javax.annotation.Nullable;
+
+import manticore.Manticore;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockChest;
 import net.minecraft.block.BlockEnderChest;
@@ -66,6 +68,7 @@ import net.minecraft.item.ItemDye;
 import net.minecraft.item.ItemRecord;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.tileentity.TileEntityChest;
+import net.minecraft.tileentity.TileEntityEnderChest;
 import net.minecraft.util.BlockRenderLayer;
 import net.minecraft.util.ClassInheritanceMultiMap;
 import net.minecraft.util.EnumFacing;
@@ -85,6 +88,7 @@ import net.minecraft.world.border.WorldBorder;
 import net.minecraft.world.chunk.Chunk;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
+import org.lwjgl.opengl.GL11;
 import org.lwjgl.util.vector.Vector3f;
 import org.lwjgl.util.vector.Vector4f;
 
@@ -563,6 +567,30 @@ public class RenderGlobal implements IWorldEventListener, IResourceManagerReload
         }
     }
 
+    public static void chestFinder(double x, double y, double z, float red, float green, float blue, float alpha) {
+        GL11.glPushMatrix();
+        GL11.glEnable(GL11.GL_BLEND);
+        GL11.glEnable(GL11.GL_LINE_SMOOTH);
+        GL11.glDisable(GL11.GL_TEXTURE_2D);
+        GL11.glDisable(GL11.GL_DEPTH_TEST);
+        GL11.glDisable(GL11.GL_LIGHTING);
+        GL11.glBlendFunc(770, 771);
+        GL11.glEnable(GL11.GL_BLEND);
+        GL11.glDepthMask(false);
+
+        GL11.glColor4f(red, green, blue, alpha);
+        GL11.glLineWidth(2F);
+        drawBoundingBox(x + 1, y + 1, z + 1, x, y, z, red, green, blue, alpha);
+
+        GL11.glDepthMask(true);
+        GL11.glDisable(GL11.GL_LINE_SMOOTH);
+        GL11.glEnable(GL11.GL_LIGHTING);
+        GL11.glEnable(GL11.GL_TEXTURE_2D);
+        GL11.glEnable(GL11.GL_DEPTH_TEST);
+        GL11.glDisable(GL11.GL_BLEND);
+        GL11.glPopMatrix();
+    }
+
     protected void stopChunkUpdates()
     {
         this.chunksToUpdate.clear();
@@ -576,6 +604,38 @@ public class RenderGlobal implements IWorldEventListener, IResourceManagerReload
             if (this.entityOutlineShader != null)
             {
                 this.entityOutlineShader.createBindFramebuffers(width, height);
+            }
+        }
+    }
+
+    public void postRenderEntities(Entity renderViewEntity, ICamera camera, float partialTicks)
+    {
+        if (Manticore.chestESPActive) {
+            for (Object e : this.mc.world.loadedTileEntityList) {
+                if (!(e instanceof TileEntityChest) && !(e instanceof TileEntityEnderChest))
+                    continue;
+
+                TileEntity ee = (TileEntity) e;
+                BlockPos blockpos = ee.getPos();
+                double xIn = (double)blockpos.getX() - TileEntityRendererDispatcher.staticPlayerX;
+                double yIn = (double)blockpos.getY() - TileEntityRendererDispatcher.staticPlayerY;
+                double zIn = (double)blockpos.getZ() - TileEntityRendererDispatcher.staticPlayerZ;
+                double sqDist = ee.getDistanceSq(Minecraft.getMinecraft().player.posX, Minecraft.getMinecraft().player.posY, Minecraft.getMinecraft().player.posZ);
+                float pct = Manticore.getPct(9F, 36F, (float)sqDist);
+                float alpha = Manticore.interpolate(0.25F, 1F, pct);
+                float red = 0F;
+                float green = 0F;
+                float blue = 0F;
+                if (e instanceof TileEntityChest) {
+                    red = 1F;
+                    green = 0F;
+                    blue = 0F;
+                } else if (e instanceof TileEntityEnderChest) {
+                    red = 0.541176471F;
+                    green = 0.168627451F;
+                    blue = 0.88627451F;
+                }
+                RenderGlobal.chestFinder(xIn, yIn, zIn, red, green, blue, alpha);
             }
         }
     }

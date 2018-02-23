@@ -3,6 +3,7 @@ package manticore;
 public class Manticore {
     public static boolean displayCoords = true;
     public static boolean lightActive = false;
+    public static boolean chestESPActive = false;
     public static boolean xrayActive = false;
     public static int[] xrayBlocks = new int[]{54, 57};
     public static boolean xrayDiamondOre = true;
