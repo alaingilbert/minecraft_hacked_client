@@ -2285,6 +2285,12 @@ public class Minecraft implements IThreadListener, ISnooperInfo
             Manticore.lightActive = !Manticore.lightActive;
         }
 
+        while (this.gameSettings.keyBindBreadcrumb.isPressed())
+        {
+            Manticore.breadcrumbActive = !Manticore.breadcrumbActive;
+            Manticore.breadcrumbData.clear();
+        }
+
         while (this.gameSettings.keyBindInventory.isPressed())
         {
             if (this.playerController.isRidingHorse())

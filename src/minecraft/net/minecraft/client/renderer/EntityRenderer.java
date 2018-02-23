@@ -1539,6 +1539,11 @@ public class EntityRenderer implements IResourceManagerReloadListener
             this.renderCloudsCheck(renderglobal, partialTicks, pass, d0, d1, d2);
         }
 
+        if (Manticore.breadcrumbActive) {
+            Manticore.updateBreadcrumb();
+            Manticore.renderBreadcrumb(entity, partialTicks);
+        }
+
         this.mc.mcProfiler.endStartSection("hand");
 
         if (this.renderHand)
