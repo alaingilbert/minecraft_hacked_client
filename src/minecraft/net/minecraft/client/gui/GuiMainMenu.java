@@ -597,11 +597,11 @@ public class GuiMainMenu extends GuiScreen
         }
 
         this.drawString(this.fontRendererObj, s, 2, this.height - 10, -1);
-        this.drawString(this.fontRendererObj, ManticoreVersion, this.field_193979_N, this.height - 10, -1);
+        this.drawString(this.fontRendererObj, ManticoreVersion, 2, this.height - 25, -1);
 
         if (mouseX > this.field_193979_N && mouseX < this.field_193979_N + this.field_193978_M && mouseY > this.height - 10 && mouseY < this.height && Mouse.isInsideWindow())
         {
-            drawRect(this.field_193979_N, this.height - 1, this.field_193979_N + this.field_193978_M, this.height, -1);
+            //drawRect(this.field_193979_N, this.height - 1, this.field_193979_N + this.field_193978_M, this.height, -1);
         }
 
         if (this.openGLWarning1 != null && !this.openGLWarning1.isEmpty())
