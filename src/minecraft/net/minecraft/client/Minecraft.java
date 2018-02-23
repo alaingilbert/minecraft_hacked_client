@@ -2283,6 +2283,7 @@ public class Minecraft implements IThreadListener, ISnooperInfo
         while (this.gameSettings.keyBindLight.isPressed())
         {
             Manticore.lightActive = !Manticore.lightActive;
+            Manticore.lightTimer =  System.currentTimeMillis();
         }
 
         while (this.gameSettings.keyBindBreadcrumb.isPressed())
