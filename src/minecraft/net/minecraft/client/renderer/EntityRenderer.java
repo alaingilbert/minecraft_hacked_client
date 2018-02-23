@@ -1223,6 +1223,10 @@ public class EntityRenderer implements IResourceManagerReloadListener
                         this.mc.fontRendererObj.drawStringWithShadow(ps, scaledWidth - textWidth - paddingRight/scaleX, paddingTop/scaleY, 16777215);
                         paddingTop += 25;
                     }
+                    if (Manticore.breadcrumbActive) {
+                        String ps = "Breadcrumb";
+                        int textWidth = this.mc.fontRendererObj.getStringWidth(ps);
+                        this.mc.fontRendererObj.drawStringWithShadow(ps, scaledWidth - textWidth - paddingRight/scaleX, paddingTop/scaleY, 16777215);
                     }
                     GlStateManager.popMatrix();
 
