@@ -42,7 +42,7 @@ public class GuiMainMenu extends GuiScreen
     private static final Logger LOGGER = LogManager.getLogger();
     private static final Random RANDOM = new Random();
 
-    private static final String ManticoreVersion = "Manticore 0.6.0";
+    private static final String ManticoreVersion = "Manticore 0.7.0";
 
     /** Counts the number of screen updates. */
     private final float updateCounter;
