@@ -2276,6 +2276,11 @@ public class Minecraft implements IThreadListener, ISnooperInfo
             this.renderGlobal.loadRenderers();
         }
 
+        while (this.gameSettings.keyBindClickAura.isPressed())
+        {
+            Manticore.clickAuraActive = !Manticore.clickAuraActive;
+        }
+
         while (this.gameSettings.keyBindGPS.isPressed())
         {
             this.displayGuiScreen(new GuiGPS());

@@ -43,6 +43,7 @@ import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.item.EntityItemFrame;
 import net.minecraft.entity.monster.EntityCreeper;
 import net.minecraft.entity.monster.EntityEnderman;
+import net.minecraft.entity.monster.EntityMob;
 import net.minecraft.entity.monster.EntitySpider;
 import net.minecraft.entity.passive.EntityAnimal;
 import net.minecraft.entity.player.EntityPlayer;
@@ -1115,22 +1116,90 @@ public class EntityRenderer implements IResourceManagerReloadListener
                 i = -1;
             }
 
-            if (this.mc.gameSettings.smoothCamera)
-            {
-                this.smoothCamYaw += f2;
-                this.smoothCamPitch += f3;
-                float f4 = partialTicks - this.smoothCamPartialTicks;
-                this.smoothCamPartialTicks = partialTicks;
-                f2 = this.smoothCamFilterX * f4;
-                f3 = this.smoothCamFilterY * f4;
-                this.mc.player.setAngles(f2, f3 * (float)i);
+
+            boolean autoAimed = false;
+
+            if (Manticore.clickAuraActive) {
+                EntityMob closestMob = null;
+                double minDist = 1000000000;
+                for (Object e : this.mc.world.loadedEntityList) {
+                    if (e instanceof EntityMob) {
+                        EntityMob ee = (EntityMob) e;
+                        if (ee.getHealth() <= 0) {
+                            continue;
+                        }
+                        double dist = ee.getDistanceSq(this.mc.player.posX, this.mc.player.posY, this.mc.player.posZ);
+                        if (dist < minDist) {
+                            minDist = dist;
+                            closestMob = (EntityMob)e;
+                        }
+                    }
+                }
+
+                if (closestMob != null) {
+                    Entity ee = closestMob;
+                    double dist = ee.getDistanceSq(this.mc.player.posX, this.mc.player.posY, this.mc.player.posZ);
+                    if (dist <= 25) {
+                        autoAimed = true;
+
+                        Vector3d ve = new Vector3d();
+                        ve.x = ee.posX;
+                        ve.y = ee.posY + ee.getEyeHeight();
+                        ve.z = ee.posZ;
+
+                        Vector3d vp = new Vector3d();
+                        vp.x = this.mc.player.posX;
+                        vp.y = this.mc.player.posY + this.mc.player.getEyeHeight();
+                        vp.z = this.mc.player.posZ;
+
+                        double d0 = vp.x - ve.x;
+                        double d1 = vp.y - ve.y;
+                        double d2 = vp.z - ve.z;
+                        double dist1 = Math.sqrt(d0 * d0 + d1 * d1 + d2 * d2);
+
+                        float a = -(float)Math.atan2(closestMob.posX - this.mc.player.posX, closestMob.posZ - this.mc.player.posZ);
+                        if (a < 0) {
+                            a += 2 * Math.PI;
+                        }
+                        a = (float)(a * 180F / Math.PI);
+
+                        double b = Math.floor(this.mc.player.rotationYaw / 360F);
+                        float c = (float)(this.mc.player.rotationYaw - (b * 360F));
+                        if (c < 0F) {
+                            c += 360F;
+                        }
+                        float n = a - c;
+                        if (n > 180) {
+                            n = (a-360) - c;
+                        } else if (n < -180) {
+                            n = (a+360) - c;
+                        }
+
+                        float pitch = (float)(Math.asin((ve.y - vp.y) / dist1) * 180F / Math.PI);
+
+                        this.mc.player.rotationYawHead += n;
+                        this.mc.player.rotationYaw += n;
+                        this.mc.player.rotationPitch = -pitch;
+                    }
+                }
             }
-            else
-            {
-                this.smoothCamYaw = 0.0F;
-                this.smoothCamPitch = 0.0F;
-                this.mc.player.setAngles(f2, f3 * (float)i);
+
+            if (!autoAimed) {
+                if (this.mc.gameSettings.smoothCamera) {
+                    this.smoothCamYaw += f2;
+                    this.smoothCamPitch += f3;
+                    float f4 = partialTicks - this.smoothCamPartialTicks;
+                    this.smoothCamPartialTicks = partialTicks;
+                    f2 = this.smoothCamFilterX * f4;
+                    f3 = this.smoothCamFilterY * f4;
+                    this.mc.player.setAngles(f2, f3 * (float) i);
+                } else {
+                    this.smoothCamYaw = 0.0F;
+                    this.smoothCamPitch = 0.0F;
+                    this.mc.player.setAngles(f2, f3 * (float) i);
+                }
             }
+
         }
 
         this.mc.mcProfiler.endSection();
@@ -1227,6 +1296,13 @@ public class EntityRenderer implements IResourceManagerReloadListener
                         String ps = "Breadcrumb";
                         int textWidth = this.mc.fontRendererObj.getStringWidth(ps);
                         this.mc.fontRendererObj.drawStringWithShadow(ps, scaledWidth - textWidth - paddingRight/scaleX, paddingTop/scaleY, 16777215);
+                        paddingTop += 25;
+                    }
+                    if (Manticore.clickAuraActive) {
+                        String ps = "Click aura";
+                        int textWidth = this.mc.fontRendererObj.getStringWidth(ps);
+                        this.mc.fontRendererObj.drawStringWithShadow(ps, scaledWidth - textWidth - paddingRight/scaleX, paddingTop/scaleY, 16777215);
+                        paddingTop += 25;
                     }
                     GlStateManager.popMatrix();
 
