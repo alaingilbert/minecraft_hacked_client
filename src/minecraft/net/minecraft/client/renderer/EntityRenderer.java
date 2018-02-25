@@ -1119,7 +1119,7 @@ public class EntityRenderer implements IResourceManagerReloadListener
 
             boolean autoAimed = false;
 
-            if (Manticore.clickAuraActive) {
+            if (Manticore.clickAuraActive || Manticore.killAuraActive) {
                 EntityMob closestMob = null;
                 double minDist = 1000000000;
                 for (Object e : this.mc.world.loadedEntityList) {
@@ -1180,6 +1180,14 @@ public class EntityRenderer implements IResourceManagerReloadListener
                         this.mc.player.rotationYawHead += yawDelta;
                         this.mc.player.rotationYaw += yawDelta;
                         this.mc.player.rotationPitch = -pitch;
+
+                        if (Manticore.killAuraActive && dist1 <= 4) {
+                            if (this.mc.player.getCooledAttackStrength(0.5F) == 1) {
+                                if (this.mc.objectMouseOver.entityHit != null) {
+                                    this.mc.playerController.attackEntity(this.mc.player, this.mc.objectMouseOver.entityHit);
+                                }
+                            }
+                        }
                     }
                 }
             }
@@ -1300,6 +1308,12 @@ public class EntityRenderer implements IResourceManagerReloadListener
                     }
                     if (Manticore.clickAuraActive) {
                         String ps = "Click aura";
+                        int textWidth = this.mc.fontRendererObj.getStringWidth(ps);
+                        this.mc.fontRendererObj.drawStringWithShadow(ps, scaledWidth - textWidth - paddingRight/scaleX, paddingTop/scaleY, 16777215);
+                        paddingTop += 25;
+                    }
+                    if (Manticore.killAuraActive) {
+                        String ps = "Kill aura";
                         int textWidth = this.mc.fontRendererObj.getStringWidth(ps);
                         this.mc.fontRendererObj.drawStringWithShadow(ps, scaledWidth - textWidth - paddingRight/scaleX, paddingTop/scaleY, 16777215);
                         paddingTop += 25;
