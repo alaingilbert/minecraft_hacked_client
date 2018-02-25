@@ -1168,17 +1168,17 @@ public class EntityRenderer implements IResourceManagerReloadListener
                         if (c < 0F) {
                             c += 360F;
                         }
-                        float n = a - c;
-                        if (n > 180) {
-                            n = (a-360) - c;
-                        } else if (n < -180) {
-                            n = (a+360) - c;
+                        float yawDelta = a - c;
+                        if (yawDelta > 180) {
+                            yawDelta = (a-360) - c;
+                        } else if (yawDelta < -180) {
+                            yawDelta = (a+360) - c;
                         }
 
                         float pitch = (float)(Math.asin((ve.y - vp.y) / dist1) * 180F / Math.PI);
 
-                        this.mc.player.rotationYawHead += n;
-                        this.mc.player.rotationYaw += n;
+                        this.mc.player.rotationYawHead += yawDelta;
+                        this.mc.player.rotationYaw += yawDelta;
                         this.mc.player.rotationPitch = -pitch;
                     }
                 }
