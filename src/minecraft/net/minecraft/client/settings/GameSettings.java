@@ -126,6 +126,7 @@ public class GameSettings
     public boolean realmsNotifications = true;
     public boolean autoJump = true;
     public TutorialSteps field_193631_S = TutorialSteps.MOVEMENT;
+    public KeyBinding keyBindFreeCam = new KeyBinding("Freecam", Keyboard.KEY_U, "Manticore");
     public KeyBinding keyBindClickAura = new KeyBinding("Click aura", Keyboard.KEY_M, "Manticore");
     public KeyBinding keyBindKillAura = new KeyBinding("Kill aura", Keyboard.KEY_K, "Manticore");
     public KeyBinding keyBindGPS = new KeyBinding("GPS", Keyboard.KEY_G, "Manticore");
@@ -193,7 +194,7 @@ public class GameSettings
 
     public GameSettings(Minecraft mcIn, File optionsFileIn)
     {
-        this.keyBindings = (KeyBinding[])ArrayUtils.addAll(new KeyBinding[] {this.keyBindKillAura, this.keyBindClickAura, this.keyBindBreadcrumb, this.keyBindGPS, this.keyBindChestESP, this.keyBindXRay, this.keyBindLight, this.keyBindAttack, this.keyBindUseItem, this.keyBindForward, this.keyBindLeft, this.keyBindBack, this.keyBindRight, this.keyBindJump, this.keyBindSneak, this.keyBindSprint, this.keyBindDrop, this.keyBindInventory, this.keyBindChat, this.keyBindPlayerList, this.keyBindPickBlock, this.keyBindCommand, this.keyBindScreenshot, this.keyBindTogglePerspective, this.keyBindSmoothCamera, this.keyBindFullscreen, this.keyBindSpectatorOutlines, this.keyBindSwapHands, this.field_193629_ap, this.field_193630_aq, this.field_194146_ao}, this.keyBindsHotbar);
+        this.keyBindings = (KeyBinding[])ArrayUtils.addAll(new KeyBinding[] {this.keyBindFreeCam, this.keyBindKillAura, this.keyBindClickAura, this.keyBindBreadcrumb, this.keyBindGPS, this.keyBindChestESP, this.keyBindXRay, this.keyBindLight, this.keyBindAttack, this.keyBindUseItem, this.keyBindForward, this.keyBindLeft, this.keyBindBack, this.keyBindRight, this.keyBindJump, this.keyBindSneak, this.keyBindSprint, this.keyBindDrop, this.keyBindInventory, this.keyBindChat, this.keyBindPlayerList, this.keyBindPickBlock, this.keyBindCommand, this.keyBindScreenshot, this.keyBindTogglePerspective, this.keyBindSmoothCamera, this.keyBindFullscreen, this.keyBindSpectatorOutlines, this.keyBindSwapHands, this.field_193629_ap, this.field_193630_aq, this.field_194146_ao}, this.keyBindsHotbar);
         this.difficulty = EnumDifficulty.NORMAL;
         this.lastServer = "";
         this.fovSetting = 70.0F;
@@ -216,7 +217,7 @@ public class GameSettings
 
     public GameSettings()
     {
-        this.keyBindings = (KeyBinding[])ArrayUtils.addAll(new KeyBinding[] {this.keyBindKillAura, this.keyBindClickAura, this.keyBindBreadcrumb, this.keyBindGPS, this.keyBindChestESP, this.keyBindXRay, this.keyBindLight, this.keyBindAttack, this.keyBindUseItem, this.keyBindForward, this.keyBindLeft, this.keyBindBack, this.keyBindRight, this.keyBindJump, this.keyBindSneak, this.keyBindSprint, this.keyBindDrop, this.keyBindInventory, this.keyBindChat, this.keyBindPlayerList, this.keyBindPickBlock, this.keyBindCommand, this.keyBindScreenshot, this.keyBindTogglePerspective, this.keyBindSmoothCamera, this.keyBindFullscreen, this.keyBindSpectatorOutlines, this.keyBindSwapHands, this.field_193629_ap, this.field_193630_aq, this.field_194146_ao}, this.keyBindsHotbar);
+        this.keyBindings = (KeyBinding[])ArrayUtils.addAll(new KeyBinding[] {this.keyBindFreeCam, this.keyBindKillAura, this.keyBindClickAura, this.keyBindBreadcrumb, this.keyBindGPS, this.keyBindChestESP, this.keyBindXRay, this.keyBindLight, this.keyBindAttack, this.keyBindUseItem, this.keyBindForward, this.keyBindLeft, this.keyBindBack, this.keyBindRight, this.keyBindJump, this.keyBindSneak, this.keyBindSprint, this.keyBindDrop, this.keyBindInventory, this.keyBindChat, this.keyBindPlayerList, this.keyBindPickBlock, this.keyBindCommand, this.keyBindScreenshot, this.keyBindTogglePerspective, this.keyBindSmoothCamera, this.keyBindFullscreen, this.keyBindSpectatorOutlines, this.keyBindSwapHands, this.field_193629_ap, this.field_193630_aq, this.field_194146_ao}, this.keyBindsHotbar);
         this.difficulty = EnumDifficulty.NORMAL;
         this.lastServer = "";
         this.fovSetting = 70.0F;

@@ -48,6 +48,7 @@ import net.minecraft.block.material.Material;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.client.audio.MusicTicker;
 import net.minecraft.client.audio.SoundHandler;
+import net.minecraft.client.entity.EntityOtherPlayerMP;
 import net.minecraft.client.entity.EntityPlayerSP;
 import net.minecraft.client.gui.FontRenderer;
 import net.minecraft.client.gui.GuiChat;
@@ -2274,6 +2275,30 @@ public class Minecraft implements IThreadListener, ISnooperInfo
         {
             Manticore.xrayActive = !Manticore.xrayActive;
             this.renderGlobal.loadRenderers();
+        }
+
+
+        while (this.gameSettings.keyBindFreeCam.isPressed())
+        {
+            Manticore.freecamActive = !Manticore.freecamActive;
+            if (Manticore.freecamActive) {
+                Manticore.fakePlayer = new EntityOtherPlayerMP(this.world, this.player.getGameProfile());
+                if (this.inGameHasFocus) {
+                    Manticore.oldX = this.player.posX;
+                    Manticore.oldY = this.player.posY;
+                    Manticore.oldZ = this.player.posZ;
+                    Manticore.fakePlayer.setEntityId(-1881);
+                    //Manticore.fakePlayer.clonePlayer(this.player, true);
+                    Manticore.fakePlayer.copyLocationAndAnglesFrom(this.player);
+                    Manticore.fakePlayer.rotationYawHead = player.rotationYawHead;
+                    this.world.addEntityToWorld(Manticore.fakePlayer.getEntityId(), Manticore.fakePlayer);
+                }
+            } else {
+                if(this.inGameHasFocus){
+                    this.player.setLocationAndAngles(Manticore.oldX, Manticore.oldY, Manticore.oldZ, this.player.rotationYaw, this.player.rotationPitch);
+                    this.world.removeEntityFromWorld(Manticore.fakePlayer.getEntityId());
+                }
+            }
         }
 
         while (this.gameSettings.keyBindClickAura.isPressed())
